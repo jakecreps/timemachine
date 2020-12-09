@@ -1,0 +1,35 @@
+{
+	"name": "Time Machine",
+	"description": "Extension that creates an icon next to Google Search results if a Wayback Machine, archive.is and/or Bing archive exists for the search result's link. The extension also opens the available archives by clicking on the extension's icon for user's open website.",
+	"version": "1.0",
+	"manifest_version": 2,
+	"icons": {"64": "icon2.png"},
+	"content_scripts" : [
+		{
+			"matches" :  ["*://google.com/*", "*://*.google.com/*"],
+			"js" : ["main.js", "jquery-3.3.1.js"]
+		},
+		{
+			"matches" :  ["<all_urls>"],
+			"exclude_matches": ["*://google.com/*", "*://*.google.com/*"],
+			"js" : ["popup.js", "jquery-3.3.1.js"]
+		}
+	],
+	"background": {
+		"scripts": ["background.js", "jquery-3.3.1.js"],
+		"persistent": false
+	},
+	"permissions": [
+		"<all_urls>",
+		"tabs",
+		"*://*.archive.org/*",
+		"*://archive.org/*",
+		"*://*.archive.is/*",
+		"*://archive.is/*",
+		"*://webcache.googleusercontent.com/*",
+		"*://*.bing.com/*",
+		"*://bing.com/*"
+	],
+	"browser_action": {},
+	"web_accessible_resources": ["icon.png", "icon2.png", "popup.js"]
+}
